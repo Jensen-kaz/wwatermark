@@ -5,6 +5,7 @@
     "keywords": ["watermark"],
     "license": "MIT",
     "homepage": "https://github.com/Jensen-kaz",
+    "minimum-stability": "dev",
     "authors": [
         {
             "name": "Anton",
