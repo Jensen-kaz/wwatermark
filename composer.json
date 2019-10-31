@@ -1,0 +1,19 @@
+{
+    "name": "watermark-maker/php-watermark-maker",
+    "description": "WatermarkMaker",
+    "keywords": ["watermark"],
+    "license": "MIT",
+    "homepage": "https://github.com/Jensen-kaz",
+    "authors": [
+        {
+            "name": "Anton",
+            "email": "anton@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3"
+    },
+    "autoload": {
+        "classmap": ["src"]
+}
+}
