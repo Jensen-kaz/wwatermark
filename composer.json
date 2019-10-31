@@ -1,6 +1,7 @@
 {
     "name": "watermark-maker/php-watermark-maker",
     "description": "WatermarkMaker",
+    "version": "1.0",
     "keywords": ["watermark"],
     "license": "MIT",
     "homepage": "https://github.com/Jensen-kaz",
