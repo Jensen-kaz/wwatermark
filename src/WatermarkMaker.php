@@ -5,22 +5,37 @@ namespace watermarkmaker\src;
 class WatermarkMaker
 {
 
-    public function addWatermark($srcImage, $srcWatermark) {
+    public function addWatermark($srcImage, $srcWatermark, $pathOut) {
 
-        $stamp = imagecreatefrompng($srcWatermark);
-        $image = imagecreatefromjpeg($srcImage);
-
-
-        $marge_right = 10;
-        $marge_bottom = 10;
-        $sx = imagesx($stamp);
-        $sy = imagesy($stamp);
+        $imageInfo = getimagesize($srcImage);
+        $watermarkInfo = getimagesize($srcWatermark);
 
 
-        imagecopy($image, $stamp, imagesx($image) - $sx - $marge_right, imagesy($image) - $sy - $marge_bottom, 0, 0, imagesx($stamp), imagesy($stamp));
+        $watermarkWidth = $watermarkInfo[0];
+        $watermarkHeight = $watermarkInfo[1];
 
-        header('Content-type: image/png');
-        imagepng($image);
-        imagedestroy($image);
+
+        $format = strtolower(substr($imageInfo['mime'], strpos($imageInfo['mime'], '/') + 1));
+
+        // определяем названия функция для создания и сохранения картинки
+        $imageCreate = "imagecreatefrom" . $format;
+        $imageSave = "image" . $format;
+
+        $img = $imageCreate($srcImage);
+
+        $watermark = imagecreatefrompng($srcWatermark);
+
+        // определяем координаты левого верхнего угла водяного знака
+        $dest_x = $imageInfo[0] - $watermarkWidth - 5;
+        $dest_y = $imageInfo[1] - $watermarkHeight - 5;
+
+
+        // помещаем водяной знак на изображение
+        imagecopy($img, $watermark, $dest_x, $dest_y, 0, 0, $watermarkWidth, $watermarkHeight);
+
+        // сохраняем изображение с уникальным именем
+        $name = mt_rand(0, 10000) . basename($srcImage);
+        $imageSave($img, $pathOut . '/' . $name);
+
     }
 }
